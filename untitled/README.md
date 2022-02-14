@@ -64,5 +64,52 @@ a = a^b;
         print(index, num)
   ~~~
 
-  
 
+求中间下表：MID = L + (R-L)/2 && L + ((R-L)>>1)
+
+求递归时间复杂度，如果子问题规模一致，则可以用master公式。
+
+![1644743404162](C:\Users\Soviet\AppData\Local\Temp\1644743404162.png)
+
+* 归并排序及其改写（每年必出）
+
+  ~~~py
+  def merge(arr, l, r, mid):
+    tempArr = []
+    p1 = l
+    p3 = mid+1
+    while p1 <= mid and p3 <= r:
+      if arr[p1] <= arr[p3]:
+        tempArr.append(arr[p1])
+        p1 = p1+1
+      if arr[p1] > arr[p3]:
+        tempArr.append(arr[p3])
+        p3 = p3+1
+    while p1 > mid and p3 <= r:
+      tempArr.append(arr[p3])
+      p3 = p3+1
+    while p1 <= mid and p3 > r:
+      tempArr.append(arr[p1])
+      p1 = p1+1
+    i = 0
+    j = l
+    while i < len(tempArr):
+      arr[j] = tempArr[i]
+      j = j+1
+      i = i+1
+  
+  def mergeSort(arr, l, r):
+    if l == r:
+      return
+    mid = int((l+r)/2)
+    mergeSort(arr, l, mid)
+    mergeSort(arr, mid+1, r)
+    merge(arr, l, r, mid)
+  ~~~
+
+  * 递归求小和问题
+  * 求逆序对数量
+
+* 快速排序
+
+  * 荷兰国旗问题
