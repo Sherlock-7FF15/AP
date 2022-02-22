@@ -113,45 +113,46 @@ a = a^b;
 * 快速排序
 
   ~~~python
+  import random as rd
   
-  def partition(arr,low,high): 
-      i = ( low-1 )         # 最小元素索引
-      pivot = arr[high]     
-    
-      for j in range(low , high): 
-    
-          # 当前元素小于或等于 pivot 
-          if   arr[j] <= pivot: 
-            
-              i = i+1 
-              arr[i],arr[j] = arr[j],arr[i] 
-    
-      arr[i+1],arr[high] = arr[high],arr[i+1] 
-      return ( i+1 ) 
-    
-   
-  # arr[] --> 排序数组
-  # low  --> 起始索引
-  # high  --> 结束索引
-    
-  # 快速排序函数
-  def quickSort(arr,low,high): 
-      if low < high: 
-    
-          pi = partition(arr,low,high) 
-    
-          quickSort(arr, low, pi-1) 
-          quickSort(arr, pi+1, high) 
-    
-  arr = [10, 7, 8, 9, 1, 5] 
-  n = len(arr) 
-  quickSort(arr,0,n-1) 
-  print ("排序后的数组:") 
-  for i in range(n): 
-      print ("%d" %arr[i]),
+  def partition(arr, left, right):
+    less = left-1 #小于数的右边界
+    more = right #大于数的左边界
+    while left < more:
+      if arr[left] < arr[right]:
+        less = less+1
+        temp = arr[left]
+        arr[left] = arr[less]
+        arr[less] = temp
+        left = left+1
+      if arr[left] > arr[right]:
+        more = more-1
+        temp = arr[left]
+        arr[left] = arr[more]
+        arr[more] = temp
+      if arr[left] == arr[right]:
+        left = left+1
+    # 交换最后一个数和大于区域的第一个数
+    temp = arr[right]
+    arr[right] = arr[more]
+    arr[more] = temp
+    return [less+1, more]
+  
+  def quickSort(arr, left, right):
+    if left < right:
+      # 交换最后一个数和随机数
+      # print('前', array)
+      # seed = rd.randint(left+1, right)
+      # temp = arr[seed]
+      # arr[seed] = arr[right]
+      # arr[right] = temp
+      equalIndex = partition(arr, left, right)
+      quickSort(arr, left, equalIndex[0]-1)
+      quickSort(arr, equalIndex[1]+1, right)
   
   ~~~
 
   
 
   * 荷兰国旗问题
+
