@@ -173,7 +173,7 @@ a = a^b;
   def heapify(arr, index, heapSize): 
     #判断某个位置的值是否为大根堆,判断某个数是否可以向下移动
     left = 2*index+1 #构建左孩子
-    while left < heapSize-1:
+    while left < heapSize-1: #注意这里一定是heapsize-1
       if arr[left] < arr[left+1]:
         largest = left+1
       else:
