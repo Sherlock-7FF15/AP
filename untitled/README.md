@@ -160,9 +160,7 @@ a = a^b;
 
   ~~~python
   def swap(arr, a, b):
-    temp = arr[a]
-    arr[a] = arr[b]
-    arr[b] = temp
+    arr[a], arr[b] = arr[b], arr[a]
   
   def heapInsert(arr, index):
     #判断某个数是否可以向上移动
@@ -205,4 +203,4 @@ a = a^b;
       print(a)
   ~~~
 
-  
+* 桶排序
