@@ -169,6 +169,10 @@ a = a^b;
     while arr[index] > arr[int((index-1)/2)]:
       swap(arr, index, int((index-1)/2))
       index = int((index-1)/2)
+  #i = len(a)-1 快一点
+  #while i > 0:
+  #  heapify(a, i, len(a))
+  #  i = i-1
   
   def heapify(arr, index, heapSize): 
     #判断某个位置的值是否为大根堆,判断某个数是否可以向下移动
