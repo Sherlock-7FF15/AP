@@ -156,3 +156,49 @@ a = a^b;
 
   * 荷兰国旗问题
 
+* 堆排序
+
+  ~~~python
+  def swap(arr, a, b):
+    temp = arr[a]
+    arr[a] = arr[b]
+    arr[b] = temp
+  
+  def heapInsert(arr, index):
+    #判断某个数是否可以向上移动
+    while arr[index] > arr[int((index-1)/2)]:
+      swap(arr, index, int((index-1)/2))
+      index = int((index-1)/2)
+  
+  def heapify(arr, index, heapSize): 
+    #判断某个位置的值是否为大根堆,判断某个数是否可以向下移动
+    left = 2*index+1 #构建左孩子
+    while left < heapSize-1:
+      if arr[left] < arr[left+1]:
+        largest = left+1
+      else:
+        largest = left
+      if arr[index] > arr[largest]:
+        largest = index
+      if largest == index:
+        break
+      swap(arr, largest, index)
+      index = largest
+      left = 2*index+1
+  
+  def heapSort(arr):
+    for i in range(len(arr)):
+      heapInsert(a, i)
+    heapSize = len(a)
+    heapSize = heapSize-1
+    swap(arr, 0, heapSize)
+    print(a)
+    while(heapSize > 0):
+      heapify(arr, 0, heapSize)
+      print(arr)
+      heapSize = heapSize-1
+      swap(arr, 0, heapSize)
+      print(a)
+  ~~~
+
+  
