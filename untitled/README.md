@@ -15,7 +15,7 @@ a = a^b;
 
 二分的算法为log 2为底N的对数。如果只写logN默认为2为底数。
 
-* 冒泡排序
+* 冒泡排序 稳定
 
   ~~~python
   def bubble(array):
@@ -33,7 +33,7 @@ a = a^b;
       i = i-1
   ~~~
 
-* 插入排序
+* 插入排序 稳定
 
   ~~~python
   def insertRange(arr):
@@ -71,7 +71,7 @@ a = a^b;
 
 ![1644743404162](C:\Users\Soviet\AppData\Local\Temp\1644743404162.png)
 
-* 归并排序及其改写（每年必出）
+* 归并排序及其改写（每年必出） 稳定
 
   ~~~py
   def merge(arr, l, r, mid):
@@ -110,7 +110,7 @@ a = a^b;
   * 递归求小和问题
   * 求逆序对数量
 
-* 快速排序
+* 快速排序 不稳定
 
   ~~~python
   import random as rd
@@ -156,7 +156,7 @@ a = a^b;
 
   * 荷兰国旗问题
 
-* 堆排序
+* 堆排序 不稳定
 
   ~~~python
   def swap(arr, a, b):
@@ -203,6 +203,6 @@ a = a^b;
       print(a)
   ~~~
 
-* 桶排序
+* 桶排序 稳定
 
 排序稳定性：值相同的元素在排序过后的相对位置是否可以不变
