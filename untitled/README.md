@@ -206,3 +206,41 @@ a = a^b;
 * 桶排序 稳定
 
 排序稳定性：值相同的元素在排序过后的相对位置是否可以不变
+
+## 链表
+
+* 单，双链表反转
+
+* 快慢指针问题
+
+  * 快指针走到头，慢指针离中间数-1
+
+    ~~~python
+    def fastSlowpoint(arr):
+      fast = 0
+      slow = 0
+      if len(arr) == 0:
+        print(fast,slow)
+        return
+      if len(arr)%2 == 0:
+        while fast < len(arr)-1:
+          if fast+2 > len(arr)-1:
+            fast = fast+1
+            print(fast,slow)
+            return
+          else:
+            fast = fast+2
+            slow = slow+1
+      else:
+        while fast < len(arr)-1:
+          if fast+2 > len(arr)-1:
+            print(fast, slow)
+            return
+          fast = fast+2
+          slow = slow+1
+      print(fast,slow)
+    ~~~
+
+  * 快指针走到头，慢指针在中间位置
+
+  * 快指针走到头，慢指针离中间数+1
