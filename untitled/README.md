@@ -209,6 +209,86 @@ a = a^b;
 
 ## 链表
 
+* 单链表
+
+  * ~~~python
+    # 带头节点的单链表
+    # 注意！头节点内存放着第一个结点的地址，即head.head = 第一个结点
+    class singleLinkedlist():
+      def __init__(self):
+        self.head = None
+      # 向链表尾部添加元素
+      def append(self, item):
+        node = Node(item)
+        if self.head == None:
+          self.head = node
+        else:
+          cur = self.head
+          while cur.next != None:
+            cur = cur.next
+          cur.next = node
+      # 在链表中删除一个元素
+      def delete(self, item):
+        cur = self.head
+        pre = None
+        # 如果链表为空，则返回true
+        if self.head == None:
+          return True
+        while cur.next != None:
+          if cur.item == item:
+            if pre == None:
+              self.head = cur.next
+            else:
+              self.next = cur.next
+          else:
+            pre = cur
+            cur = cur.next
+      # 在头节点前插入元素
+      def add(self, item):
+        node = Node(item)
+        node.next = self.head
+        self.head = node
+      # 返回当前链表长度
+      def length(self):
+        i = 0
+        cur = self.head
+        if cur == None:
+          return 0
+        while cur != None:
+          i = i+1
+          cur = cur.next
+        return i
+      # 遍历链表
+      def items(self):
+        temp = []
+        cur = self.head
+        if cur == None:
+          print('none')
+          return
+        for i in range(self.length()):
+          temp.append(cur.item)
+          cur = cur.next
+        print(temp)
+      # 在某个地方插入一个结点
+      def insert(self, n, item):
+        i = 0
+        if n <= 0:
+          self.add(item)
+          return
+        if n == self.length():
+          self.append(item)
+          return
+        cur = self.head
+        node = Node(item)
+        # for i in range(n-1):
+        #   cur = cur.next
+        while i < n-1:
+          cur = cur.next
+          i = i+1
+        node.next = cur.next
+        cur.next = node
+    ~~~
+
 * 单，双链表反转
 
 * 快慢指针问题
