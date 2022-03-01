@@ -264,11 +264,12 @@ a = a^b;
         cur = self.head
         if cur == None:
           print('none')
-          return
+          return None
         for i in range(self.length()):
           temp.append(cur.item)
           cur = cur.next
         print(temp)
+        return(temp)
       # 在某个地方插入一个结点
       def insert(self, n, item):
         i = 0
@@ -287,6 +288,8 @@ a = a^b;
           i = i+1
         node.next = cur.next
         cur.next = node
+      def find(self, item):
+        return item in self.items()
     ~~~
 
 * 单，双链表反转
