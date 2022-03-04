@@ -292,6 +292,20 @@ a = a^b;
         return item in self.items()
     ~~~
 
+  * ~~~python
+    # 用头插法反转单链表
+    def reverseList(list):
+      rever = singleLinkedlist()
+      while list.head is not None:
+        list.items()
+        temp = Node(None)
+        temp.item = list.head.item
+        temp.next = rever.head
+        rever.head = temp
+        list.head = list.head.next
+      return rever
+    ~~~
+
 * 单，双链表反转
 
 * 快慢指针问题
@@ -336,7 +350,7 @@ a = a^b;
 
   * 快指针走到头，慢指针离中间数+1
 
-逻辑问题：如果要将一个数字插入在一个数组的第n个元素之后（前），应该如何代码实现？
+逻辑问题：如果要将一个数字插入在一个数组的第n个元素之后，应该如何代码实现？
 
 ~~~python
 如果要插在n之后：
