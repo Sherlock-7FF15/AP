@@ -115,40 +115,35 @@ a = a^b;
   ~~~python
   import random as rd
   
-  def partition(arr, left, right):
-    less = left-1 #小于数的右边界
-    more = right #大于数的左边界
+  def swap(arr, a, b):
+    arr[a], arr[b] = arr[b], arr[a]
+  
+  def patition(arr, left, right):
+    less = left-1
+    more = right
     while left < more:
       if arr[left] < arr[right]:
         less = less+1
-        temp = arr[left]
-        arr[left] = arr[less]
-        arr[less] = temp
+        swap(arr, less, left)
         left = left+1
-      if arr[left] > arr[right]:
-        more = more-1
-        temp = arr[left]
-        arr[left] = arr[more]
-        arr[more] = temp
+        continue
       if arr[left] == arr[right]:
         left = left+1
-    # 交换最后一个数和大于区域的第一个数
-    temp = arr[right]
-    arr[right] = arr[more]
-    arr[more] = temp
+        continue
+      if arr[left] > arr[right]:
+        more = more-1
+        swap(arr, left, more)
+        continue
+    swap(arr, right, more)
     return [less+1, more]
   
-  def quickSort(arr, left, right):
+  def quickSortr(arr, left, right):
     if left < right:
-      # 交换最后一个数和随机数
-      # print('前', array)
-      # seed = rd.randint(left+1, right)
-      # temp = arr[seed]
-      # arr[seed] = arr[right]
-      # arr[right] = temp
-      equalIndex = partition(arr, left, right)
-      quickSort(arr, left, equalIndex[0]-1)
-      quickSort(arr, equalIndex[1]+1, right)
+      seed = rd.randint(left+1, right)
+      swap(arr, seed, right)
+      eq = patition(arr, left, right)
+      quickSortr(arr, left, eq[0]-1)
+      quickSortr(arr, eq[1]+1, right)
   
   ~~~
 
