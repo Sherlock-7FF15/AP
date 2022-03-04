@@ -347,9 +347,39 @@ a = a^b;
   * 快指针走到头，慢指针在中间位置
 
   * 快指针走到头，慢指针离中间数+1
-    判断是否为回文结构
+    判断是否为回文结构，回文结构，用有限变量判断（三个指针）
 
-  * 回文结构，用有限变量判断（三个指针）
+    ~~~python
+    # 回文结构 三指针
+    def backList(list):
+      sl = list.head
+      fa = list.head
+      le = list.head
+      while fa.next is not None:
+        if fa.next.next is not None:
+          sl = sl.next
+          fa = fa.next.next
+        else:
+          fa = fa.next
+      fa = reverList(sl)
+      while fa.next is not None:
+        if fa.item == le.item:
+          fa = fa.next
+          le = le.next
+        else:
+          return False
+      return True
+    
+    def reverList(head):
+      next = None
+      pre = None
+      while head is not None:
+        next = head.next
+        head.next = pre
+        pre = head
+        head = next
+      return pre
+    ~~~
 
   * 将链表以某个值划分为=，<,>区域（6个变量）
 
