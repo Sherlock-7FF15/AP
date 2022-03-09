@@ -392,14 +392,110 @@ while i < n-1:
 ## 二叉树
 
 * 三种遍历方法的非递归（重要，必须写会）
+
 * * 先序：先压入头结点
     弹出一个结点
     压入右结点
     压入左结点
   * 中序：
     * 左右头
+
 * * 后序：头左右（弹出后直接放入收集栈）
-* 宽度有限遍历：
+
+  ~~~ python
+  class TreeNode():
+    # 初始化二叉树
+    def __init__(self, data, left = None, right= None):
+      self.left = left
+      self.right = right
+      self.data = data
+  
+  # 先序遍历递归
+  def frontSelf(node):
+    if node is None:
+      return
+    print(node.data)
+    frontSelf(node.left)
+    frontSelf(node.right)
+  
+    # 先序遍历非递归
+  def frontWhile(node):
+    if node is not None:
+      stack = []
+      stack.append(node)
+      while len(stack) != 0:
+        node = stack.pop()
+        print(node.data)
+        if node.right is not None:
+          stack.append(node.right)
+        if node.left is not None:
+          stack.append(node.left)
+  
+  # 中序遍历递归
+  def middleSelf(node):
+    if node is None:
+      return
+    middleSelf(node.left)
+    print(node.data)
+    middleSelf(node.right)
+  
+  # 中序遍历非递归
+  def middleWhile(node):
+    if node is not None:
+      stack = []
+      while len(stack) != 0 or node is not None:
+        if node is not None:
+          stack.append(node)
+          node = node.left
+        else:
+          node = stack.pop()
+          print(node.data)
+          node = node.right
+  
+  # 后序遍历递归
+  def endSelf(node):
+    if node is None:
+      return
+    endSelf(node.left)
+    endSelf(node.right)
+    print(node.data)
+  
+  # 后序遍历非递归方法一
+  def endWhile1(node):
+    return
+  
+  # 后续递归方法二 先压左再压右，然后弹入栈
+  def endWhile2(node):
+    if node is not None:
+      stack1 = []
+      stack2 = []
+      stack1.append(node)
+      while len(stack1) != 0 and node is not None:
+        node = stack1.pop()
+        stack2.append(node)
+        if node.left is not None:
+          stack1.append(node.left)
+        if node.right is not None:
+          stack2.append(node.right)
+      while len(stack2) != 0:
+        node = stack2.pop()
+        print(node.data)
+      
+  ~~~
+
+* 宽度有限遍历：（基础）
   * 用队列，压入头左右，然后弹出一个
   * 如何知道一个数里面最大的宽度和结点数
+
+* 判断搜索二叉树（左比右边小）
+
+  * 讲中序遍历的打印代码换成比较。设置一个preValue
+
+* 判断完全二叉树
+
+  * 宽度遍历（若有右无左）
+
+* 判断满二叉树
+
+* 判断平衡二叉树
 
