@@ -553,6 +553,51 @@ while i < n-1:
 
   * 讲中序遍历的打印代码换成比较。设置一个preValue
 
+  * 套路
+
+    ~~~python
+    # 判断搜索二叉树（二叉树套路练习）
+    class retType(object):
+      def __init__(self, min, max, isa):
+        self.min = min
+        self.max = max
+        self.isSear = isa
+    
+    def maxa(a, b):
+      if a > b:
+        return a
+      else:
+        return b
+    
+    def mina(a, b):
+      if a < b:
+        return a
+      else:
+        return b
+    
+    def searBiTree(node):
+      if node is None:
+        return None
+      lRetSet = searBiTree(node.left)
+      rRetSet = searBiTree(node.right)
+      min = node.data
+      max = node.data
+      isSear = True
+      if lRetSet is not None:
+        min = mina(node.data, lRetSet.min)
+        max = maxa(node.data, lRetSet.max)
+      if rRetSet is not None:
+        min = mina(node.data, rRetSet.min)
+        max = maxa(node.data, rRetSet.max)
+      if lRetSet is not None and (lRetSet.max >= node.data or lRetSet.isSear is False):
+        isSear = False
+      if rRetSet is not None and (rRetSet.min <= node.data or rRetSet.isSear is False):
+        isSear = False
+      ret = retType(min, max, isSear)
+      return ret
+    
+    ~~~
+
 * 判断完全二叉树
 
   * 宽度遍历（若有右无左）
