@@ -553,6 +553,20 @@ while i < n-1:
 
   * 讲中序遍历的打印代码换成比较。设置一个preValue
 
+    ~~~ python
+    def isSearTree2(node):
+      if node is None:
+        return
+      isSearTree2(node.left)
+      global PreVal
+      global flag
+      print(PreVal, node.data)
+      if PreVal > node.data:
+        flag = False
+      PreVal = node.data
+      isSearTree2(node.right)
+    ~~~
+
   * 套路
 
     ~~~python
@@ -602,9 +616,36 @@ while i < n-1:
 
   * 宽度遍历（若有右无左）
 
+    ~~~python
+    # 判断一个树是否为完全二叉树
+    def isCBT(node):
+      if node is None:
+        return True
+      arr = [] # 建立队列
+      flag = True # 判断一个结点的子结点是否双全，如果不是则改为false，后续结点必须为叶节点。
+      arr.append(node)
+      while len(arr) != 0:
+        node = arr.pop(0)
+        l = node.left
+        r = node.right
+        if (r is not None and l is None) or (flag == False and (l is not None or r is not None)):
+          return False
+        if node.left is not None:
+          arr.append(node.left)
+        if node.right is not None:
+          arr.append(node.right)
+        if node.left is not None and node.right is None:
+          flag = False
+      return True
+    ~~~
+
 * 判断满二叉树
 
 * 判断平衡二叉树（左右子树均平衡且左右子树的高度差<1）
 
+* 判断两个结点的公共祖先
+
 ### 解决二叉树递归的套路：判断左子树要的信息，右的信息，然后找自己如何解决出这两种信息（树形dp：向左树和右树分别要信息）
+
+## 图
 
