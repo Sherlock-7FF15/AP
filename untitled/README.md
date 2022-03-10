@@ -485,7 +485,69 @@ while i < n-1:
 
 * 宽度有限遍历：（基础）
   * 用队列，压入头左右，然后弹出一个
+
+    ~~~python
+    # 按照宽度遍历二叉树
+    def withWhile(node):
+      if node is None:
+        return
+      arr = []
+      arr.append(node)
+      while len(arr) != 0:
+        # 出队列
+        node = arr.pop(0)
+        print(node.data)
+        if node.left is not None:
+          arr.append(node.left)
+        if node.right is not None:
+          arr.append(node.right)
+    
+    withWhile(node1)
+    ~~~
+
   * 如何知道一个数里面最大的宽度和结点数
+
+    ~~~python
+    # 找到最大宽度
+    def withMaxWhile(node):
+      if node is None:
+        return
+      arr = []
+      arr.append(node)
+      dic = {node: 1} #记录结点的层数
+      max = 0 # 最大的层数
+      curLevel = 1 # 目前来到的层数
+      curNodeNum = 0 # 当前层数的结点个数
+      while len(arr) != 0:
+        # 出队列
+        node = arr.pop(0)
+        nodeLevel = dic[node]
+        if nodeLevel == curLevel:
+          curNodeNum = curNodeNum+1
+        else:
+          curLevel = curLevel+1
+          print(curLevel-1, curNodeNum)
+          # max = max(max, curNodeNum)
+          if max >= curNodeNum:
+            max = max
+          else:
+            max = curNodeNum
+          curNodeNum = 1
+        if node.left is not None:
+          arr.append(node.left)
+          dic[node.left] = curLevel + 1
+        if node.right is not None:
+          arr.append(node.right)
+          dic[node.right] = curLevel + 1
+      # 比较最后一层的大小
+      if max >= curNodeNum:
+        max = max
+      else:
+        max = curNodeNum
+      print(max)
+    
+    withMaxWhile(node1)
+    ~~~
 
 * 判断搜索二叉树（左比右边小）
 
