@@ -646,7 +646,66 @@ while i < n-1:
 * 判断两个结点的公共祖先
 
   * 递归
+
+    ~~~python
+    # 没理解
+    def selfNCA(head, node1, node2):
+      if head == None or head == node1 or head == node2:
+        return head
+      left = selfNCA(head.left, node1, node2)
+      right = selfNCA(head.right, node1, node2)
+      if left is not None and right is not None:
+        return head
+      if left is not None:
+        return left
+      else:
+        return right
+    ~~~
+
   * 非递归
+
+    ~~~python
+    # 判断两个结点的公共祖先
+    def NCA(head, node1, node2):
+      dic = {head: head}
+      process(head, dic)
+      list = [] # 存放node1结点的所有父结点
+      cur = node1
+      while cur != dic[cur]:
+        cur = dic[cur]
+        list.append(cur)
+      for item in list:
+        print(item.data)
+      cur2 = node2
+      while cur2 != dic[cur2]:
+        cur2 = dic[cur2]
+        if list.count(cur2) != 0:
+          return cur2
+      return False
+      
+    
+    # 将所有结点的父亲结点放入dic
+    def process(head, dic):
+      if head is None:
+        return
+      dic[head.left] = head
+      dic[head.right] = head
+      process(head.left, dic)
+      process(head.right, dic)
+    ~~~
+
+* 求一个结点的后继结点（中序遍历的下一个）
+
+  ~~~python
+  class suNode(object):
+    def __init__(self, data, left = None, right = None, parent = None):
+      self.data = data
+      self.left = left
+      self.right = right
+      self.parent = parent
+  ~~~
+
+* 二叉树的序列化和反序列化
 
 ### 解决二叉树递归的套路：判断左子树要的信息，右的信息，然后找自己如何解决出这两种信息（树形dp：向左树和右树分别要信息）
 
