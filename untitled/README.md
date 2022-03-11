@@ -707,7 +707,36 @@ while i < n-1:
 
 * 二叉树的序列化和反序列化
 
+* 微软折纸条问题
+
 ### 解决二叉树递归的套路：判断左子树要的信息，右的信息，然后找自己如何解决出这两种信息（树形dp：向左树和右树分别要信息）
 
 ## 图
+
+大概每三个公司出一道题
+
+平常自己选择一种图结构练，遇到题目后将题目上的图转换为自己熟悉的结构
+
+~~~python
+class gNode(object):
+  def __init__(self, data):
+    self.data = data
+  inE = 0 # 直接进入结点的结点数
+  outE = 0 # 直接出节点的结点数
+  next = [] # 直接发散出的边
+  edges = [] # 直接发散出去边的具体参数
+
+class edge(object):
+  def __init__(self, weight, nfrom, to):
+    self.weight = weight
+    self.nfrom = nfrom
+    self.to = to
+
+class graph(object):
+  def __init__():
+    node = {} # 存放结点的信息 编号:node
+    list = [] # 存放边的信息
+~~~
+
+
 
