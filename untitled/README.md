@@ -734,9 +734,14 @@ class edge(object):
 
 class graph(object):
   def __init__():
-    node = {} # 存放结点的信息 编号:node
+    node = {} # 存放结点的信息 编号:node 编号=node.data
     list = [] # 存放边的信息
 ~~~
 
 
 
+* 图的宽度优先遍历（一个队列，一个list检查是否重复进队列）
+* 深度优先遍历
+* 拓扑排序算法
+* prim和克鲁斯卡尔（并查集）
+* Dijkstra
