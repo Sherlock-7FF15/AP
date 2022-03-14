@@ -721,10 +721,10 @@ while i < n-1:
 class gNode(object):
   def __init__(self, data):
     self.data = data
-  inE = 0 # 直接进入结点的结点数
-  outE = 0 # 直接出节点的结点数
-  next = [] # 直接发散出的边
-  edges = [] # 直接发散出去边的具体参数
+    self.next = [] # 直接发散出的边
+    self.edges = [] # 直接发散出去边的具体参数
+    self.inE = 0 # 直接进入结点的结点数
+    self.outE = 0 # 直接出节点的结点数
 
 class edge(object):
   def __init__(self, weight, nfrom, to):
@@ -733,9 +733,9 @@ class edge(object):
     self.to = to
 
 class graph(object):
-  def __init__():
-    node = {} # 存放结点的信息 编号:node 编号=node.data
-    list = [] # 存放边的信息
+  def __init__(self):
+    self.node = {} # 存放结点的信息 编号:node 编号=node.data
+    self.list = [] # 存放边的信息
 
 # 构建一个图
 node1 = gNode(1)
