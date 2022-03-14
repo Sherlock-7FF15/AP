@@ -736,6 +736,39 @@ class graph(object):
   def __init__():
     node = {} # 存放结点的信息 编号:node 编号=node.data
     list = [] # 存放边的信息
+
+# 构建一个图
+node1 = gNode(1)
+node2 = gNode(2)
+node3 = gNode(3)
+node4 = gNode(4)
+node5 = gNode(5)
+
+a = [edge(3, node1, node3),
+edge(4, node1, node4),
+edge(2, node2, node1),
+edge(5, node2, node5),
+edge(8, node3, node4),
+edge(6, node4, node5),
+edge(1, node4, node2)]
+
+graph1 = graph()
+graph1.node[1]= node1
+graph1.node[2]= node2
+graph1.node[3]= node3
+graph1.node[4]= node4
+graph1.node[5]= node5
+
+
+for items in a:
+  graph1.list.append(items)
+
+for item in graph1.list:
+  if item.nfrom and item.to is not None:
+    item.nfrom.outE = item.nfrom.outE+1
+    item.nfrom.next.append(item.to)
+    item.nfrom.edges.append(item)
+    item.to.inE = item.to.inE+1
 ~~~
 
 
