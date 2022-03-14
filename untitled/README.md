@@ -774,7 +774,45 @@ for item in graph1.list:
 
 
 * 图的宽度优先遍历（一个队列，一个list检查是否重复进队列）
+
+  ~~~python
+  def widthErgo(graph):
+    arr = [] # 队列
+    checkList = [] # 检查一个结点是否进入过队列
+    arr.append(graph.node[1])
+    checkList.append(graph.node[1])
+    while len(arr) != 0:
+      node = arr.pop(0)
+      print(node.data)
+      for item in node.next:
+        if checkList.count(item) == 0:
+          arr.append(item)
+          checkList.append(item)
+  ~~~
+
 * 深度优先遍历
+
+  ~~~python
+  # 深度优先遍历
+  def deepErgo(graph):
+    stack = [] # 栈
+    checkList = []
+    stack.append(graph.node[1])
+    checkList.append(graph.node[1])
+    print(graph.node[1].data)
+    while len(stack) != 0:
+      node = stack.pop()
+      for item in node.next:
+        if checkList.count(item) == 0:
+          stack.append(node)
+          stack.append(item)
+          print(item.data)
+          checkList.append(item)
+          break
+  ~~~
+
 * 拓扑排序算法
+
 * prim和克鲁斯卡尔（并查集）
+
 * Dijkstra
