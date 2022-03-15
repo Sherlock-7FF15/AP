@@ -864,4 +864,50 @@ for item in graph1.list:
 
 * prim和克鲁斯卡尔（并查集）
 
+  ~~~python
+  # 克鲁斯卡尔集合
+  
+  class mySet(object):
+    def __init__(self, graph):
+      self.nodeSet = {} # 存放结点和对应集合 node: list
+      for i in graph.node:
+        self.list = []
+        self.list.append(graph.node[i])
+        self.nodeSet[graph.node[i]] = self.list
+    
+    # 判断两个结点是否属于同一个集合
+    def isSameSet(self, nFrom, to):
+      set1 = self.nodeSet[nFrom]
+      set2 = self.nodeSet[to]
+      return set1 == set2
+  
+    # 将两个集合合并为一个
+    def union(self, nFrom, to):
+      set1 = self.nodeSet[nFrom]
+      set2 = self.nodeSet[to]
+      for item in set2:
+        set1.append(item)
+      self.nodeSet[to] = set1
+  
+      def revSort(edge):
+    return edge.weight
+  
+  def kruscarl(graph):
+    gra = mySet(graph)
+    priArr = [] # 边的优先队列
+    for edge in graph.list:
+      priArr.append(edge)
+    priArr.sort(key = revSort, reverse = True) # 降序排序，每次取最后的一个为最小值
+    print(priArr)
+    while len(priArr) != 0:
+      edge = priArr.pop()
+      print(edge.nfrom.data, edge.to.data)
+      if gra.isSameSet(edge.nfrom, edge.to) is False:
+        gra.union(edge.nfrom, edge.to)
+        print(edge.nfrom.data, edge.to.data)
+  ~~~
+
+  
+
 * Dijkstra
+
