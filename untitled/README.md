@@ -813,6 +813,55 @@ for item in graph1.list:
 
 * 拓扑排序算法
 
+  * 先判断入度为0的点
+
+  * 擦掉这个结点及其影响
+
+    ~~~python
+    # 拓扑排序
+    def tuopuGraph(graph):
+      dic = {} # 记录所有结点的入度
+      inMapZero = [] # 入度为0的结点的队列
+      for i in graph.node:
+        dic[graph.node[i]] = graph.node[i].inE
+        if graph.node[i].inE == 0:
+          inMapZero.append(graph.node[i])
+      while len(inMapZero) != 0:
+        node = inMapZero.pop()
+        print(node.data)
+        for item in node.next:
+          dic[item] = dic[item]-1
+          if dic[item] == 0:
+            inMapZero.append(item)
+    ~~~
+
+* 图的转化
+
+  ~~~python
+  # 构建一个无向图
+  graph2 = [[0,2,3,-1,-1], [2,0,-1,1,5], [3,-1,-1,8,-1], [-1,1,8,0,6], [-1,5,-1,6,0]]
+  graph3 = graph()
+  
+  # 首先创建结点
+  for i in range(len(graph2)):
+    node = gNode(i+1)
+    graph3.node[i+1] = node
+  
+  # 由于无向图的边可以视为两条有向边，因此在遍历的时候直接创建
+  for i in range(len(graph2)):
+    index = 1
+    for j in graph2[i]:
+      if j > 0:
+        ed = edge(j, graph3.node[i+1], graph3.node[index])
+        graph3.node[i+1].outE = graph3.node[i+1].outE+1
+        graph3.node[i+1].next.append(graph3.node[index])
+        graph3.node[i+1].edges.append(ed)
+        graph3.node[index].inE = graph3.node[index].inE+1
+      index = index+1
+  ~~~
+
+  
+
 * prim和克鲁斯卡尔（并查集）
 
 * Dijkstra
