@@ -857,7 +857,10 @@ for item in graph1.list:
         graph3.node[i+1].next.append(graph3.node[index])
         graph3.node[i+1].edges.append(ed)
         graph3.node[index].inE = graph3.node[index].inE+1
+        if index > i:
+          graph3.list.append(ed)
       index = index+1
+    
   ~~~
 
   
