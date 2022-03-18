@@ -868,6 +868,7 @@ for item in graph1.list:
 * prim和克鲁斯卡尔（并查集）
 
   ~~~python
+  # 克鲁斯卡尔 还得优化并查集结构
   class mySet(object):
     def __init__(self, graph):
       self.nodeSet = {} # 存放结点和对应集合 node: list
@@ -915,79 +916,28 @@ for item in graph1.list:
   ~~~
 
   ~~~python
-  def span_tree(g, start_label):
-      """最小生成树"""
-      # sys.setrecursionlimit(1500)  # set the maximum depth as 1500
-      min_weights = 99999
-      results = []
+  def heapSort(edge):
+    return edge.weight
   
-      def recurse(w, stack):
-          if w.is_marked() == False:
-              # 顶点未标记则入栈
-              stack.push(w)
-              w.set_mark()
-              # 未遍历完的情况
-              if stack.get_size() != g.size_vertices():
-                  for x in w.neighboring_vertices():
-                      # 继续从顶点的连通节点往下继续遍历
-                      recurse(x, stack)
-                      # 如果从w的连通节点再往下没有连通节点，
-                      # 则出栈w已入栈的连通节点
-                      if stack.peek() != w and \
-                              stack.get_size() < g.size_vertices():
-                          temp = stack.pop()
-                          temp.clear_mark()
-              else:
-                  # 已经遍历完所有顶点，并且满足了条件，
-                  # 但最后一个节点还有连通的顶点时，不再遍历
-                  # if w.get_edge_count() > 0:
-                  #     return None
-                  pass
-          else:
-              return None
-  
-      def generate_results(sun_stack):
-          temp = ""
-          for v_temp in sun_stack:
-              temp += v_temp.get_label() + "->"
-          temp = temp[:len(temp) - 2]
-          temp += ": " + str(sun_stack.get_weights())
-          temp += "\n"
-          results.append(temp)
-  
-      for v in g.vertices():
-          # stack存储整个顶点, sun_stack复制stack的最新状态并继续遍历
-          stack = LinkedStack()
-          stack.push(v)
-          sun_stack = copy.deepcopy(stack)
-          for w in v.neighboring_vertices():
-              # 清除所有顶点的标记状态(因为上一次的遍历顶点已经被标记)
-              g.clear_vertex_marks()
-              v.set_mark()
-              # 递归遍历
-              recurse(w, sun_stack)
-              # 如果遍历结束,栈内顶点数==图的顶点数代表该次遍历成功，加入成功列表
-              if sun_stack.get_size() == g.size_vertices():
-                  if sun_stack.get_weights() < min_weights:
-                      results.clear()
-                      generate_results(sun_stack)
-                      min_weights = sun_stack.get_weights()
-                  elif sun_stack.get_weights() == min_weights:
-                      generate_results(sun_stack)
-              else:
-                  # 未找到路径则继续下一个连接顶点的遍历
-                  pass
-              sun_stack = copy.deepcopy(stack)
-  
-      if results == None:
-          return "No best path"
-      string = "Here are " + str(len(results)) + " path:\n"
-      results.insert(0, string)
-      return results
+  def primAlgo(graph):
+    arrList = [] # 小根堆，放置所有已经解锁的边
+    nodeList = [] # 放置所有已经被访问的结点（to点）
+    nodeList.append(graph.node[1])
+    cur = graph.node[1]
+    print(cur.data)
+    for edge in cur.edges:
+      arrList.append(edge) # 解锁所有的边
+    arrList.sort(key = heapSort, reverse = True)
+    while len(nodeList) != 0:
+      edge = arrList.pop()
+      if nodeList.count(edge.to) == 0:
+        print(edge.to.data)
+        nodeList.append(edge.to)
+        for edg in edge.to.edges:
+          arrList.append(edg) # 解锁所有的边
+        arrList.sort(key = heapSort, reverse = True)
   
   ~~~
-
-  
 
 * Dijkstra
 
