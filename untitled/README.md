@@ -869,37 +869,49 @@ for item in graph1.list:
 
   ~~~python
   class mySet(object):
-    def __init__(self):
-      self.publicList = []
+    def __init__(self, graph):
+      self.nodeSet = {} # 存放结点和对应集合 node: list
+      self.sameSet = {} # 存放每个结点相等的集合
+      for i in graph.node:
+        self.nodeSet[graph.node[i]] = [graph.node[i]]
+        self.sameSet[graph.node[i]] = [graph.node[i]]
     
-    def isSameSet(self, node1, node2): # 判断两个结点是否同时在集合中
-      if self.publicList.count(node1) == 0 or self.publicList.count(node2) == 0:
-        return True
-      else:
-        return False
+    def isSameSet(self, nFrom, to): # 判断两个集合是否为同一个集合
+      set1 = self.nodeSet[nFrom]
+      set2 = self.nodeSet[to]
+      return set1 == set2
+      
   
-    def union(self, node1, node2): # 将两个集合合并
-      if self.publicList.count(node1) == 0:
-        self.publicList.append(node1)
-      if self.publicList.count(node2) == 0:
-        self.publicList.append(node2)
+    def union(self, nFrom, to): # 将两个集合合并
+      set1 = self.nodeSet[nFrom]
+      set2 = self.nodeSet[to]
+      for item in set2:
+        set1.append(item)
+      set2 = set1 # 将两个结点的公共结点集合指向一个地址
+      for item in self.sameSet[to]:
+        self.sameSet[nFrom].append(item)
+      self.sameSet[to] = self.sameSet[nFrom] # 将两个结点的相同结点列表相等
+      for item in self.sameSet[to]: # 对于每个结点
+        self.sameSet[item] = self.sameSet[to] # 将所有的结点的公共结点归一
+        self.nodeSet[item] = self.nodeSet[to] # 将所有结点的集合归一
+      
   
   def heapSort(edge):
     return edge.weight
   
   def kruscarl(graph):
-    priArr = [] # 设置边的优先队列
-    gra = mySet()
-    for edge in graph.list: # 将所有的边依次加入队列
+    gra = mySet(graph)
+    priArr = [] # 边的优先队列
+    for edge in graph.list:
       priArr.append(edge)
-    priArr.sort(key = heapSort, reverse = True) # 将所有的边排序
+    priArr.sort(key = heapSort, reverse = True) # 降序排序，每次取最后的一个为最小值
     while len(priArr) != 0:
       edge = priArr.pop()
-      fro = edge.nfrom
-      to = edge.to
-      if gra.isSameSet(fro, to) is True:
-        gra.union(fro, to)
-        print(edge.weight)
+      if gra.isSameSet(edge.nfrom, edge.to) is False:
+        gra.union(edge.nfrom, edge.to)
+        print(edge.nfrom.data, edge.to.data)
+  
+  
   ~~~
 
   ~~~python
