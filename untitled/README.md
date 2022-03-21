@@ -941,6 +941,40 @@ for item in graph1.list:
 
 * Dijkstra （需要手动改堆优化，注意）
 
+  ~~~python
+  def getMin(a, b):
+    if a>b:
+      return b
+    else:
+      return a
+  
+  def dijkstra(head):
+    distanceHead = {} # node: distance
+    selectedNode = [] # 已经访问过的node
+    distanceHead[head] = 0
+    node = getMiniUnselecNode(distanceHead, selectedNode) 
+    while node is not None:
+      distance = distanceHead[node]
+      for edge in node.edges:
+        toNode = edge.to
+        if toNode not in distanceHead:
+          distanceHead[toNode] = edge.weight + distance
+        distanceHead[toNode] = getMin(distanceHead[toNode], distance+edge.weight)
+      selectedNode.append(node)
+      node = getMiniUnselecNode(distanceHead, selectedNode)
+    return distanceHead
+  
+  def getMiniUnselecNode(distanceHead, selectedNode): # 找到一个最小的未选择过的记录，此处需要优化
+    min = float("inf") # 初始化最小值
+    minNode = None
+    for node in distanceHead:
+      if distanceHead[node] < min:
+        if node not in selectedNode:
+          min = distanceHead[node]
+          minNode = node
+    return minNode
+  ~~~
+
 ### 前缀树
 
 
@@ -948,3 +982,8 @@ for item in graph1.list:
 
 
 我们知道， **python中的数字类型是不可变数据**。也就是数字类型数据在 `内存` 中是不会发生改变，当变量值发生改变时，会新申请一块[内存](https://so.csdn.net/so/search?q=%E5%86%85%E5%AD%98&spm=1001.2101.3001.7020)赋值为新值，然后将变量指向新的内存地址。 
+
+
+
+## 贪心算法
+
