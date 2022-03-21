@@ -939,5 +939,5 @@ for item in graph1.list:
   
   ~~~
 
-* Dijkstra
+* Dijkstra （需要手动改堆优化，注意）
 
