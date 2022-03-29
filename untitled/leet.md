@@ -28,3 +28,26 @@ class Solution(object):
         return result.next
 ~~~
 
+* 最大面积
+
+~~~python
+class Solution(object):
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        if len(height) < 2:
+            return 0
+        maxVol = 0
+        i = 0
+        j = len(height)-1
+        while i < j:
+            maxVol = max(maxVol, min(height[i], height[j])*(j-i))
+            if height[i] < height[j]:
+                i = i+1
+            else:
+                j = j-1
+        return maxVol
+~~~
+
