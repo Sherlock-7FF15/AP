@@ -87,7 +87,6 @@ class Solution(object):
           return reList
   ~~~
 
-  `注意！判断等式的位置非常重要！！！！`
+  `注意！判断等式的位置非常重要！！！！如果while的判断条件做了变动后一定要continue或者是把变动放在最后。`
 
   
-
