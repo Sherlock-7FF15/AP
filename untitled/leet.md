@@ -80,7 +80,7 @@ class Solution(object):
                           j = j+1
                       while j < k and nums[k] == nums[k+1]:
                           k = k-1
-                  if -nums[i] > nums[j] + nums[k]:
+                  if -nums[i] > nums[j] + nums[k]: # 如果这两个条件放在等于前就错
                       j = j+1
                   if -nums[i] < nums[j] + nums[k]:
                       k = k-1
@@ -90,3 +90,4 @@ class Solution(object):
   `注意！判断等式的位置非常重要！！！！`
 
   
+
