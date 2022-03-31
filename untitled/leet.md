@@ -89,4 +89,34 @@ class Solution(object):
 
   `注意！判断等式的位置非常重要！！！！如果while的判断条件做了变动后一定要continue或者是把变动放在最后。`
 
+  16：
+
+  ~~~python
+  class Solution(object):
+      def threeSumClosest(self, nums, target):
+          """
+          :type nums: List[int]
+          :type target: int
+          :rtype: int
+          """
+          nums.sort()
+          thSum = float('inf')
+          print(nums)
+          for i in range(len(nums)):
+              j = i+1
+              k = len(nums)-1
+              while j < k:
+                  if nums[i] + nums[j] + nums[k] == target:
+                      return nums[i] + nums[j] + nums[k]
+                  if fabs(target-(nums[i] + nums[j] + nums[k])) < fabs(target-thSum):
+                          thSum = nums[i] + nums[j] + nums[k]
+                  if nums[i] + nums[j] + nums[k] < target:
+                      j = j+1
+                      continue
+                  if nums[i] + nums[j] + nums[k] > target:
+                      k = k-1
+                      continue
+          return thSum
+  ~~~
+
   
