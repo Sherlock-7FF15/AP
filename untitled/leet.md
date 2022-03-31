@@ -119,4 +119,47 @@ class Solution(object):
           return thSum
   ~~~
 
+  递归匹配以及字符串
+
+  ~~~python
+  class Solution(object):
+      def letterCombinations(self, digits):
+          """
+          :type digits: str
+          :rtype: List[str]
+          """
+          if len(digits) == 0:
+              return []
+          digits = list(digits)
+          digList = []
+          ret = []
+          for item in digits:
+              digList.append(matchNum(item))
+          print(digList)
+          search(digList, ret, '', 0)
+          return ret
+      
+  def matchNum(dig):
+      mapDig = {}
+      asc = 97
+      for i in range(2, 7):
+          mapDig[str(i)] = [chr(asc), chr(asc+1), chr(asc+2)]
+          asc = asc+3
+      mapDig['7'] = ['p', 'q', 'r', 's']
+      mapDig['8'] = ['t', 'u', 'v']
+      mapDig['9'] = ['w', 'x', 'y', 'z']
+      return mapDig[dig]
+      
+  def search(digList, ret, letter, i):
+      if i == len(digList):
+          ret.append(letter)
+          return
+      for item in digList[i]:
+          letter = letter+item
+          search(digList, ret, letter, i+1)
+          letter = list(letter)
+          letter.remove(item)
+          letter = ''.join(letter)
+  ~~~
+
   
