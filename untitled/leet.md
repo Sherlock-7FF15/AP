@@ -302,8 +302,48 @@ class Solution(object):
               else:
                   break
           return head
+  # 反转第K组
+  # Definition for singly-linked list.
+  # class ListNode(object):
+  #     def __init__(self, val=0, next=None):
+  #         self.val = val
+  #         self.next = next
+  class Solution(object):
+      def reverseKGroup(self, head, k):
+          """
+          :type head: ListNode
+          :type k: int
+          :rtype: ListNode
+          """
+          if head is None:
+              return head
+          if head.next is None:
+              return head
+          cur1 = head.next
+          cur2 = cur1.next
+          if cur2 is None:
+              head.next = None
+              cur1.next = head
+              return cur1
+          nextN = cur2.next
+          k = k-1
+          while k > 0:
+              if cur1 is None or cur2 is None:
+                  return head
+              if k == 1:
+                  nextN = cur2.next
+                  cur2.next = nextN.next
+                  cur1.next = nextN
+                  nextN.next = cur2
+                  print(cur1.val, cur2.val)
+                  return head
+              else:
+                  cur1 = cur2.next
+                  cur2 = cur1.next
+                  k = k-1
+          return head
+              
+              
   ~~~
 
   
-
-* 
