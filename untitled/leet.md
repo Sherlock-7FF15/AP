@@ -348,4 +348,87 @@ class Solution(object):
 
   ###思考！head = cur2 cur2 = cur2.next 则head 的值为？以及a=1 b = a a=2则b为？两者的区别是什么？
 
+
+
+25 链表反转k个一组的数
+
+~~~python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverseKGroup(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if head is None or head.next is None or k == 1:
+            return head
+        pre = None
+        cur1 = head
+        cur2 = head
+        while cur2 is not None and cur1 is not None:
+            pre, cur1, cur2 = movePoint(pre, cur1, cur2, head, k)
+            if cur1 == None or cur2 == None:
+                return head
+            if cur2 is not None:
+                pre, cur1, cur2, head = swap(pre, cur1, cur2, head, k)
+            else:
+                return head
+        return head
+            
+def movePoint(pre, cur1, cur2, head, k):
+    if pre == None and cur2 == head:
+        for i in range(k-1):
+            if cur2 is not None:
+                cur2 = cur2.next
+            else:
+                return None, None, None
+        return pre, cur1, cur2
+    if pre == None and cur2 != head:
+        for i in range(k):
+            if cur2 is not None and cur1 is not None:
+                cur2 = cur2.next
+                cur1 = cur1.next
+            else:
+                return None, None, None
+        pre = head
+        for i in range(k-1):
+            pre = pre.next
+        return pre, cur1, cur2
+    for i in range(k):
+        if cur2 is not None and cur1 is not None:
+            cur2 = cur2.next
+            cur1 = cur1.next
+            pre = pre.next
+        else:
+            return None, None, None
+    return pre, cur1, cur2
+
+def swap(pre, cur1, cur2, head, k):
+    if pre is None:
+        while cur2 != cur1:
+            nextN = cur1.next
+            cur1.next = cur2.next
+            cur2.next = cur1
+            cur1 = nextN
+        for i in range(k-1):
+            cur2 = cur2.next
+        head = cur1
+        return pre, cur1, cur2, head
+    while cur2 != cur1:
+        nextN = cur1.next
+        pre.next = nextN
+        cur1.next = cur2.next
+        cur2.next = cur1
+        cur1 = nextN
+    for i in range(k-1):
+        cur2 = cur2.next
+    return pre, cur1, cur2, head
+    
+~~~
+
 * 
