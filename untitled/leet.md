@@ -1,4 +1,4 @@
-## Easy
+## Leetcode
 
 * 两数和
 
