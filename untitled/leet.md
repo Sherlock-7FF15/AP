@@ -346,4 +346,6 @@ class Solution(object):
               
   ~~~
 
-  
+  ###思考！head = cur2 cur2 = cur2.next 则head 的值为？以及a=1 b = a a=2则b为？两者的区别是什么？
+
+* 
