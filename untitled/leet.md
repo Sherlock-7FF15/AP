@@ -258,5 +258,52 @@ class Solution(object):
                   
   ~~~
 
+* 链表中结点的交换
+
+  ~~~python
+  # Definition for singly-linked list.
+  # class ListNode(object):
+  #     def __init__(self, val=0, next=None):
+  #         self.val = val
+  #         self.next = next
+  class Solution(object):
+      def swapPairs(self, head):
+          """
+          :type head: ListNode
+          :rtype: ListNode
+          """
+          if head is None:
+              return None
+          if head.next is None:
+              return head
+          # 交换头两个结点
+          cur1 = head
+          cur2 = cur1.next
+          nextN = cur2.next
+          cur1.next = nextN
+          cur2.next = cur1
+          head = cur2
+          temp = cur1
+          cur1 = cur2
+          cur2 = temp
+          # 用三个指针完成结点的交换。交换过程中cur1指向两个结点的前一个结点，cur2指向第一个，nextN指		# 向第二个
+          while cur1 is not None and cur2 is not None:
+              if cur2.next is not None:
+                  if cur2.next.next is not None:
+                      cur2 = cur2.next
+                      cur1 = cur1.next
+                      nextN = cur2.next
+                      cur1.next = nextN
+                      cur2.next = nextN.next
+                      nextN.next = cur2
+                      cur1 = cur1.next
+                  else:
+                      break
+              else:
+                  break
+          return head
+  ~~~
+
   
 
+* 
