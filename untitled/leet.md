@@ -431,4 +431,63 @@ def swap(pre, cur1, cur2, head, k):
     
 ~~~
 
-* 
+* 86链表国旗问题
+
+  ~~~python
+  # Definition for singly-linked list.
+  # class ListNode(object):
+  #     def __init__(self, val=0, next=None):
+  #         self.val = val
+  #         self.next = next
+  class Solution(object):
+      def partition(self, head, x):
+          """
+          :type head: ListNode
+          :type x: int
+          :rtype: ListNode
+          """
+          node = ListNode(x)
+          sortH = node
+          pre = None
+          sortr = node
+          cur = head
+          while cur is not None:
+              nextN = cur.next
+              if cur.val >= node.val:
+                  sortr.next = cur
+                  cur.next = None
+                  sortr = cur
+                  cur = nextN
+                  continue
+              if cur.val < node.val:
+                  if pre == None:
+                      cur.next = node
+                      pre = cur
+                      sortH = cur
+                      cur = nextN
+                  else:
+                      cur.next = node
+                      pre.next = cur
+                      pre = cur
+                      cur = nextN
+                  continue
+              # 如果等于放在一起
+              # if cur.val == node.val:
+              #     if sortr == node:
+              #         node.next = cur
+              #         cur.next = None
+              #         sortr = cur
+              #         cur = nextN
+              #     else:
+              #         cur.next = node.next
+              #         node.next = cur
+              #         cur = nextN
+          if pre is not None:
+              pre.next = node.next
+          else:
+              return node.next
+          return sortH
+              
+  ~~~
+
+  
