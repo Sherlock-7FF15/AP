@@ -431,7 +431,7 @@ def swap(pre, cur1, cur2, head, k):
     
 ~~~
 
-* 86链表国旗问题
+* 86链表国旗问题[Partition Array According to Given Pivot](https://leetcode.com/problems/partition-array-according-to-given-pivot/) 
 
   ~~~python
   # Definition for singly-linked list.
