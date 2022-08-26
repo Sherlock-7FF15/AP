@@ -490,4 +490,7 @@ def swap(pre, cur1, cur2, head, k):
               
   ~~~
 
-  
+  ###leetcode128
+
+  hashset在搜索速度上要大于list
+
