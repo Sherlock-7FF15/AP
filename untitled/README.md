@@ -1107,3 +1107,7 @@ public class main {
 
 ~~~
 
+建议将entity中的变量名和数据库中的名字都使用小写，否则在使用Mybatis plus中的getOne查询时可能出错。
+
+https://blog.csdn.net/weixin_44937106/article/details/125271031
+
