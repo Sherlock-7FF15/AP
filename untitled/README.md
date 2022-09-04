@@ -1025,3 +1025,85 @@ http://c.biancheng.net/view/2258.html
 
 * 用1G内存统计40亿个数出现最多的数用哈希函数实现
 
+
+
+* Java 在开发中，若一个类中定义了一个静态变量并且返回一个类，在将这个类作为函数返回值的方法返回参数时可以直接classname.method()
+
+~~~java
+package Practic1;
+
+import java.util.*;
+
+public class main {
+    public static void main(String[] args) {
+        Solution a = new Solution("nimama");
+        Node abc = nimama();
+
+    }
+
+    static Node getMinNode(HashSet<Node> selected, HashMap<Node, Integer> selectedNode) {
+        Node new_node = null;
+        Integer min_val = Integer.MAX_VALUE;
+
+        for(Node node : selectedNode.keySet()){
+            Integer distance = selectedNode.get(node);
+            if(!selected.contains(node) && distance < min_val) {
+                new_node = node;
+                min_val = distance;
+            }
+        }
+        return  new_node;
+
+    }
+    static Node nimama() {
+        return Node.ab();
+    }
+
+
+    static class Node {
+        public Integer data;
+        public HashSet<Node> next;
+        public int inE;
+        public int outE;
+        public HashSet<Edge> edges;
+
+        public static Node ab() {
+            return new Node(1);
+        }
+
+        public Node(int data) {
+            this.data = data;
+            this.next = new HashSet<>();
+            this.inE = 0;
+            this.outE = 0;
+            this.edges = new HashSet<>();
+        }
+
+    }
+
+    static class Edge {
+        public int weight;
+        public Node from;
+        public Node to;
+
+        public Edge(int weight, Node from, Node to){
+            this.from = from;
+            this.to = to;
+            this.weight = weight;
+        }
+
+    }
+
+    static class Graph {
+        public HashMap<Integer, Node> nodes;
+        public HashSet<Edge> edges;
+
+        public Graph() {
+            this.edges = new HashSet<>();
+            this.nodes = new HashMap<>();
+        }
+    }
+}
+
+~~~
+
