@@ -494,3 +494,8 @@ def swap(pre, cur1, cur2, head, k):
 
   hashset在搜索速度上要大于list
 
+### leetcode1567 最长连续乘积为正数的子序列长度
+
+https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/discuss/820072/EASY-soultion-with-DRY-RUN-JAVA
+
+太妙了
