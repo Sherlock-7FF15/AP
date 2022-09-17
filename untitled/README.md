@@ -1111,3 +1111,56 @@ public class main {
 
 https://blog.csdn.net/weixin_44937106/article/details/125271031
 
+## 字符串算法
+
+1. KMP
+
+```java
+package Practic1;
+
+public class KMP {
+    public int kmp(String str1, String str2) {
+        if (str1 == null || str2 == null || str2.length() > str1.length()) {
+            return -1;
+        }
+        char[] stra = str1.toCharArray();
+        char[] strb = str2.toCharArray();
+        int i = 0;
+        int j = 0;
+        int[] next = getNextArray(strb);
+        while (i < stra.length && j < strb.length) {
+            if (stra[i] == strb[j]) {
+                i++;
+                j++;
+            } else if (next[j] == -1) {
+                i++;
+            } else {
+                j = next[j];
+            }
+        }
+        return j == str2.length() ? i-j : -1;
+    }
+
+    public int[] getNextArray(char[] ms) {
+        if(ms.length == 1) {
+            return new int[] {-1};
+        }
+        int[] next = new int[ms.length];
+        next[0] = -1;
+        next[1] = 0;
+        int cn = 0;
+        int i = 2;
+        while (i < next.length) {
+            if (ms[i-1] == ms[cn]) {
+                next[i++] = ++cn;
+            } else if (cn > 0) {
+                cn = next[cn];
+            } else {
+                next[i++] = 0;
+            }
+        }
+        return next;
+    }
+}
+```
+
