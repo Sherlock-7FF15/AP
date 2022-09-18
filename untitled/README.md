@@ -1164,3 +1164,76 @@ public class KMP {
 }
 ```
 
+2. Manacher算法求回文字符串长度
+
+```java
+package Practic1;
+
+public class Mannacher {
+
+    /**
+     *Manacher Algorithm
+     * @param ab is the String which you want to search its maximum Patrolim
+     * @return return Pa array of String ab
+     */
+    public int[] manacher(String ab) {
+        /*
+        *this part is aim to pre-process the target string to ['#', x, '#' ....]
+        * */
+        char[] ms = ab.toCharArray();
+        char[] ori = new char[ms.length*2+1];
+        int index = 1;
+        int ori_index = 0;
+        ori[0] = '#';
+        while (index < ori.length) {
+            ori[index] = ms[ori_index];
+            ori[index+1] = '#';
+            index = index+2;
+            ori_index++;
+        }
+
+        /*
+        * for this part is core of the Manacher Algo.
+        * */
+        int R = -1; //R indicates temporary maximum Pa right border of one center.
+        int C = -1; // C is the element which has temporary maximum right border.
+        int[] arr = new int[ori.length]; // target array.
+
+
+        for(int i = 0; i < ori.length; i++) {
+
+            /*
+             * if current element is outside R, we assign its border with 1.
+             * else we chose minimum border by comparing its own border and the distance between this element and R.
+             * arr[2*C-i] is the symmetric part of i respect to B.
+             * This part of border is not necessary to be considered.
+             * */
+            if (R > i) {
+                arr[i] = Math.min(arr[2*C-i], R-i);
+            } else {
+                arr[i] = 1;
+            }
+
+            /*
+            * See whether i can expand its border.
+            * we need to first promise that i and its border is less than len(arr).
+            * */
+            while (i+arr[i] < arr.length && i-arr[i] > -1) {
+                if (ori[i+arr[i]] == ori[i-arr[i]]) {
+                    arr[i]++;
+                } else {
+                    break;
+                }
+            }
+
+            // update C and R
+            if (i+arr[i] > R) {
+                C = i;
+                R = i+arr[i];
+            }
+        }
+        return arr;
+    }
+}
+```
+
