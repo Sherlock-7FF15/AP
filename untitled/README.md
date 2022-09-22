@@ -1151,7 +1151,7 @@ public class KMP {
         int cn = 0;
         int i = 2;
         while (i < next.length) {
-            if (ms[i-1] == ms[cn]) {
+            if (ms[i-1] == ms[cn]) { // please node that this must be ms[i-1].if it is i, then it will include i itself.
                 next[i++] = ++cn;
             } else if (cn > 0) {
                 cn = next[cn];
