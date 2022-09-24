@@ -1242,3 +1242,12 @@ Order by 不可以出现在子查询中！！！
 where, group by, and having can appear in one sql.
 
 but where must occur before others.
+
+第19，22题没写
+
+~~~mysql
+set @i=0; --设置变量
+select @i:=@i+1 `order`, a.s_id, a.average from
+(select student.s_id, avg(score.s_score) average from student inner join score on student.s_id = score.s_id GROUP BY student.s_id ORDER BY avg(score.s_score) desc) a;
+~~~
+
