@@ -1238,3 +1238,7 @@ public class Mannacher {
 ```
 
 Order by 不可以出现在子查询中！！！
+
+where, group by, and having can appear in one sql.
+
+but where must occur before others.
