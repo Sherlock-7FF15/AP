@@ -1290,3 +1290,68 @@ public class SlipWindow {
 }
 ~~~
 
+## 单调栈
+
+~~~java
+package Practic1;
+
+import java.util.LinkedList;
+import java.util.Stack;
+
+/*
+* 单调站主要是来求距离每个数最近的大于/小于它的那个数的位置
+* */
+public class SingleStack {
+    public void single(int[] target) {
+        Stack<LinkedList<Integer>> stack = new Stack<>();
+
+        for (int i = 0; i < target.length; i++) {
+            /*
+            if stack is not 0 and top of the stack < current target, we pop the stack, and current target is its closest right
+            element, and current stack top is its closest left element.
+            * */
+            while (stack.size() != 0 && target[stack.peek().getLast()] < target[i]) {
+                LinkedList<Integer> tmp = stack.pop();
+                for (int item : tmp) {
+                    System.out.print(item);
+                    if (stack.isEmpty()) {
+                        System.out.print(" left: "+null);
+                    } else {
+                        System.out.print(" left: " + stack.peek().getLast());
+                    }
+                    System.out.println((" right: "+i));
+                }
+            }
+            
+            /*
+            * if current element = top element, then we add this index to top element(LinkedList). Else we add a new element.
+            * */
+            if (!stack.isEmpty() && target[stack.peek().getLast()] == target[i]) {
+                stack.peek().add(i);
+            } else {
+                LinkedList<Integer> obj = new LinkedList<>();
+                obj.add(i);
+                stack.add(obj);
+            }
+        }
+        /*
+        * process remaining elements in stack.
+        * */
+        while (!stack.isEmpty()) {
+            LinkedList<Integer> tmp = stack.pop();
+            for (int item : tmp) {
+                System.out.print(item);
+                if (stack.isEmpty()) {
+                    System.out.print(" left: "+null);
+                } else {
+                    System.out.print(" left: " + stack.peek().getLast());
+                }
+                System.out.println((" right: "+null));
+            }
+        }
+
+    }
+}
+
+~~~
+
