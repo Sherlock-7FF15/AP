@@ -1355,3 +1355,8 @@ public class SingleStack {
 
 ~~~
 
+java匹配多个空格：\\\s+
+
+Bit operation:
+
+leetcode 201
