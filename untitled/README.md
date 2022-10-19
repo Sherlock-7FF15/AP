@@ -1451,5 +1451,82 @@ class TrieNode {
  * boolean param_2 = obj.search(word);
  * boolean param_3 = obj.startsWith(prefix);
  */
+
+// method2(self)
+
+class Trie {
+    
+    public Node root;
+
+    public Trie() {
+        root = new Node();
+    }
+    
+    public void insert(String word) {
+        Node node = root;
+        char[] tar = word.toCharArray();
+
+        for (int i = 0; i < tar.length; i++) {
+            node.pass++;
+            int index = tar[i]-'a';
+            if (node.next[index] == null) {
+                Node tmp = new Node();
+                node.next[index] = tmp;
+            }
+            node = node.next[index];
+            node.pass++;
+        }
+        node.end = true;
+        // System.out.println(root.pass);
+    }
+    
+    public boolean search(String word) {
+        char[] tar = word.toCharArray();
+        Node node = root;
+        for (int i = 0; i < tar.length; i++) {
+            int index = tar[i]-'a';
+            if (node.next[index] != null) {
+                node = node.next[index];
+            } else {
+                return false;
+            }
+        }
+        return node.end;
+    }
+    
+    public boolean startsWith(String prefix) {
+        char[] tar = prefix.toCharArray();
+        Node node = root;
+        
+        for (int i = 0; i < tar.length; i++) {
+            int index = tar[i]-'a';
+            if (node.next[index] != null) {
+                node = node.next[index];
+            } else {
+                return false;
+            }
+        }
+        return node != null;
+    }
+}
+class Node {
+    public int pass;
+    public Node[] next;
+    public boolean end;
+    
+    public Node() {
+        next = new Node[26];
+        pass = 0;
+        end = false;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
 ```
 
